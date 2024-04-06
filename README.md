@@ -2,7 +2,7 @@
 
 ## Description
 
-This project was created to display prototype designs for soccer balls that follow the standard 32 piece design ([Truncated Icosahedron](https://en.wikipedia.org/wiki/Truncated_icosahedron)) built from 12 pentagons and 20 hexagons. This idea was inspired by the videos of [jonpaulsballs](https://www.youtube.com/@jonpaulsballs/videos) and his [tutorial](https://www.youtube.com/watch?v=TGMWMHw8OpA&ab_channel=jonpaulsballs) on how to build a standard 32 piece soccer ball. This project can be used to prototype designs before following his [tutorial](https://www.youtube.com/watch?v=TGMWMHw8OpA&ab_channel=jonpaulsballs) and building a soccer ball of your own design. A demo of this soccer ball prototype 3D viewer can be accessed at [johnprovazek.com/soccerballs](https://www.johnprovazek.com/stateparks/).
+This project was created to display prototype designs for soccer balls that follow the standard 32 piece design ([Truncated Icosahedron](https://en.wikipedia.org/wiki/Truncated_icosahedron)) built from 12 pentagons and 20 hexagons. This idea was inspired by the videos of [jonpaulsballs](https://www.youtube.com/@jonpaulsballs/videos) and his [tutorial](https://www.youtube.com/watch?v=TGMWMHw8OpA&ab_channel=jonpaulsballs) on how to build a standard 32 piece soccer ball. This project can be used to prototype designs before following his [tutorial](https://www.youtube.com/watch?v=TGMWMHw8OpA&ab_channel=jonpaulsballs) and building a soccer ball of your own design. A demo of this soccer ball prototype 3D viewer can be accessed at [johnprovazek.com/soccerballs](https://www.johnprovazek.com/soccerballs/).
 
 Built using vanilla JavaScript and the [three.js](https://threejs.org/) library.
 
