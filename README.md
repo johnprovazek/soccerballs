@@ -33,5 +33,5 @@ Each soccer ball design contains a name, hexagon array, and pentagon array. The 
 - The UV mapping for the pentagon shape could use improvement to match the "inflation" in the hexagon UV mapping. Setting this project's mode to "debug" will clearly show this issue.
 - Add the panel number in the debug overlay.
 - The stitching image could use improvement ( adobe illustrator ).
-- Design real prototypes with clean SVGs (adobe illustrator ).
+- Design real prototypes with clean SVGs ( adobe illustrator ).
 - Add a loading animation when toggling between soccer balls and applying the new textures.
