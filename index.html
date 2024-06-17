@@ -1,31 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>soccerballs</title>
-    <link rel="icon" type="image/x-icon" href="./public/images/favicon.ico">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
     <div id="soccer-ball-viewer-container">
       <div id="soccer-ball-viewer-background"></div>
       <div id="soccer-ball-button-prev" class="soccer-ball-button hidden">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="10" fill="white"/>
-          <path fill="white" d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z" stroke="black" stroke-width="1"/>
-          <path fill="white" d="M13.293 7.293 8.586 12l4.707 4.707 1.414-1.414L11.414 12l3.293-3.293-1.414-1.414z" stroke="black" stroke-width="1"/>
+          <circle cx="12" cy="12" r="10" fill="white" />
+          <path
+            fill="white"
+            d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z"
+            stroke="black"
+            stroke-width="1"
+          />
+          <path
+            fill="white"
+            d="M13.293 7.293 8.586 12l4.707 4.707 1.414-1.414L11.414 12l3.293-3.293-1.414-1.414z"
+            stroke="black"
+            stroke-width="1"
+          />
         </svg>
       </div>
       <div id="soccer-ball-button-next" class="soccer-ball-button hidden">
         <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10" fill="white"/>
-          <path fill="white" d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z" stroke="black" stroke-width="1"/>
-          <path fill="white" d="M9.293 8.707 12.586 12l-3.293 3.293 1.414 1.414L15.414 12l-4.707-4.707-1.414 1.414z" stroke="black" stroke-width="1"/>
+          <circle cx="12" cy="12" r="10" fill="white" />
+          <path
+            fill="white"
+            d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z"
+            stroke="black"
+            stroke-width="1"
+          />
+          <path
+            fill="white"
+            d="M9.293 8.707 12.586 12l-3.293 3.293 1.414 1.414L15.414 12l-4.707-4.707-1.414 1.414z"
+            stroke="black"
+            stroke-width="1"
+          />
         </svg>
       </div>
       <div id="soccer-ball-name">
         <svg viewBox="0 0 240 24" preserveAspectRatio="xMidYMax" xmlns="http://www.w3.org/2000/svg">
-          <text id="soccer-ball-name-text" fill="white" font-size="24" text-anchor="middle" dominant-baseline="middle" x="120" y="14.6" font-family="Courier" stroke="black" stroke-width="2" style="paint-order:stroke;"></text>
+          <text
+            id="soccer-ball-name-text"
+            fill="white"
+            font-size="24"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            x="120"
+            y="14.6"
+            font-family="Courier"
+            stroke="black"
+            stroke-width="2"
+            style="paint-order: stroke"
+          ></text>
         </svg>
       </div>
     </div>
@@ -37,6 +69,6 @@
         }
       }
     </script>
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="js/index.js"></script>
   </body>
 </html>

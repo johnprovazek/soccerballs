@@ -1,0 +1,182 @@
+body {
+  margin: 0px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+#soccer-ball-viewer-container {
+  height: 100vh;
+  width: 100vw;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: grab;
+}
+#soccer-ball-viewer-container:active {
+  cursor: grabbing;
+}
+
+#soccer-ball-viewer-background {
+  height: 100dvmin;
+  width: 100dvmin;
+  left: 50%;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background: radial-gradient(circle, rgba(119, 119, 119, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
+  z-index: -1;
+}
+
+.soccer-ball-button {
+  position: absolute;
+  cursor: pointer;
+  clip-path: circle(50%);
+  top: 50vh;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-height: 51px) {
+  .soccer-ball-button {
+    display: block;
+  }
+}
+
+@media (max-height: 50px) {
+  .soccer-ball-button {
+    display: none;
+  }
+}
+
+.soccer-ball-button > svg {
+  display: block;
+}
+
+.soccer-ball-button > svg > circle {
+  fill: transparent;
+}
+
+.soccer-ball-button:hover > svg > circle {
+  fill: #bbbbbb;
+}
+
+.soccer-ball-button:active > svg > circle {
+  fill: transparent;
+}
+
+/* Fixes mobile issues */
+@media (hover: none) {
+  .soccer-ball-button:hover > svg > circle {
+    fill: transparent;
+  }
+  .soccer-ball-button:active > svg > circle {
+    fill: #bbbbbb;
+  }
+}
+
+.soccer-ball-button {
+  outline: none;
+}
+
+#soccer-ball-button-prev {
+  left: 0%;
+}
+
+#soccer-ball-button-next {
+  right: 0%;
+}
+
+#soccer-ball-name {
+  position: fixed;
+  bottom: 0%;
+  opacity: 1;
+  pointer-events: none;
+}
+
+#soccer-ball-name > svg {
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .soccer-ball-button {
+    height: max(50px, 10dvh);
+    width: max(50px, 10dvh);
+    margin-top: min(-25px, -5dvh);
+  }
+  #soccer-ball-name {
+    height: max(50px, 10dvh);
+    width: 100dvw;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .soccer-ball-button {
+    height: 10dvw;
+    width: 10dvw;
+    margin-top: -5dvw;
+  }
+  #soccer-ball-name {
+    height: 10dvw;
+    width: 100dvw;
+  }
+}
+
+/* Ugly pure css hack to fade the soccer-ball-name when the window height is small */
+@media (min-height: 240px) and (max-height: 250px) {
+  #soccer-ball-name {
+    opacity: 0.9;
+  }
+}
+@media (min-height: 229px) and (max-height: 239px) {
+  #soccer-ball-name {
+    opacity: 0.8;
+  }
+}
+@media (min-height: 218px) and (max-height: 228px) {
+  #soccer-ball-name {
+    opacity: 0.7;
+  }
+}
+@media (min-height: 207px) and (max-height: 217px) {
+  #soccer-ball-name {
+    opacity: 0.6;
+  }
+}
+@media (min-height: 196px) and (max-height: 206px) {
+  #soccer-ball-name {
+    opacity: 0.5;
+  }
+}
+@media (min-height: 185px) and (max-height: 195px) {
+  #soccer-ball-name {
+    opacity: 0.4;
+  }
+}
+@media (min-height: 174px) and (max-height: 184px) {
+  #soccer-ball-name {
+    opacity: 0.3;
+  }
+}
+@media (min-height: 163px) and (max-height: 173px) {
+  #soccer-ball-name {
+    opacity: 0.2;
+  }
+}
+@media (min-height: 151px) and (max-height: 162px) {
+  #soccer-ball-name {
+    opacity: 0.1;
+  }
+}
+@media (max-height: 150px) {
+  #soccer-ball-name {
+    opacity: 0;
+  }
+}

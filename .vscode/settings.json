@@ -1,0 +1,17 @@
+{
+  "prettier.configPath": ".vscode/.prettierrc",
+  "files.exclude": {
+    "local-dev/": true
+  },
+  "search.exclude": {
+    "local-dev/": true
+  },
+  "cSpell.words": [
+    "importmap",
+    "johnprovazek",
+    "jonpaulsballs",
+    "soccerball",
+    "soccerballs",
+    "wireframe"
+  ]
+}

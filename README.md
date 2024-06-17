@@ -12,21 +12,21 @@ This project was built using vanilla JavaScript and the [three.js](https://three
 
 ## Usage
 
-After cloning this repo navigate to the [templates](./public/textures/templates/) directory. Here you will find a handful of helpful image files to assist you with designing textures of your own. These image files were created to to help with designing for the UV mapping between the soccer ball panel shapes and the textures.
+After cloning this repo navigate to the [templates](images/textures/templates/) directory. Here you will find a handful of helpful image files to assist you with designing textures of your own. These image files were created to to help with designing for the UV mapping between the soccer ball panel shapes and the textures.
 
-It may be helpful to look at the designs in the [panels](./public/textures/panels/) directory for inspiration.
+It may be helpful to look at the designs in the [panels](images/textures/panels/) directory for inspiration.
 
-Once you have designed your panels, place them in the appropriate subdirectory under the [panels](./public/textures/panels/) directory to correspond with the shape. Note that this script is currently setup to only accept panels in the PNG format.
+Once you have designed your panels, place them in the appropriate subdirectory under the [panels](images/textures/panels/) directory to correspond with the shape. Note that this script is currently setup to only accept panels in the PNG format.
 
-Next you will need to reference these files in the [soccerball.json](./public/data/soccerballs.json) file.
+Next you will need to reference these files in the [soccerball.json](images/data/soccerballs.json) file.
 
-Each soccer ball design contains a name, hexagon array, and pentagon array. The soccer ball name is limited to 16 characters. The hexagon and pentagon arrays contain the name of the texture file (without the file extension) and the rotation number for the texture. Follow the format of the [soccerball.json](./public/data/soccerballs.json) file when adding your own designs.
+Each soccer ball design contains a name, hexagon array, and pentagon array. The soccer ball name is limited to 16 characters. The hexagon and pentagon arrays contain the name of the texture file (without the file extension) and the rotation number for the texture. Follow the format of the [soccerball.json](images/data/soccerballs.json) file when adding your own designs.
 
 ## Credits
 
 [jonpaulsballs](https://www.youtube.com/@jonpaulsballs/videos) was the YouTube channel that inspired this project.
 
-[Dr. Andrew Marsh's Polyhedron Generator](https://drajmarsh.bitbucket.io/poly3d.html) was used to generate the intital 3D soccer ball shape. On his website you can set the base polyhedron to "icosahedron" and the conway polyhedra notation to "I(1)u9" to generate the same object this project started with.
+[Dr. Andrew Marsh's Polyhedron Generator](https://drajmarsh.bitbucket.io/poly3d.html) was used to generate the initial 3D soccer ball shape. On his website you can set the base polyhedron to "icosahedron" and the conway polyhedra notation to "I(1)u9" to generate the same object this project started with.
 
 ## Bugs & Improvements
 
