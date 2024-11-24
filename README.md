@@ -8,7 +8,7 @@ Built using vanilla JavaScript and the [three.js](https://threejs.org/) library.
 
 <div align="center">
   <picture>
-    <img src="https://repository-images.githubusercontent.com/776272736/da18c78f-70f2-4457-84b6-30958441115e" width="830px">
+    <img src="https://repository-images.githubusercontent.com/776272736/d366a10c-b9f5-48ec-9a88-0c8265ad382c" width="830px">
   </picture>
 </div>
 
