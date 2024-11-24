@@ -6,6 +6,12 @@ This project was created to display prototype designs for soccer balls that foll
 
 Built using vanilla JavaScript and the [three.js](https://threejs.org/) library.
 
+<div align="center">
+  <picture>
+    <img src="https://repository-images.githubusercontent.com/776272736/da18c78f-70f2-4457-84b6-30958441115e" width="830px">
+  </picture>
+</div>
+
 ## Installation
 
 This project was built using vanilla JavaScript and the [three.js](https://threejs.org/) library. This project is currently setup to use the [three.js](https://threejs.org/) library from the CDN but could easily be [reconfigured](https://threejs.org/docs/index.html#manual/en/introduction/Installation) to use the npm package. Clone this repo to get started designing soccer balls of your own.
