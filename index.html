@@ -8,9 +8,22 @@
   </head>
   <body>
     <div id="soccer-ball-viewer-container">
-      <div id="soccer-ball-viewer-background"></div>
+      <div id="loading-symbol-container" class="center-square">
+        <svg id="loading-symbol" viewBox="0 0 100 100" style="display: block">
+          <circle
+            stroke-dasharray="94.24777960769379 33.41592653589793"
+            r="20"
+            stroke-width="4"
+            stroke="black"
+            fill="none"
+            cy="50"
+            cx="50"
+          ></circle>
+        </svg>
+      </div>
+      <div id="soccer-ball-viewer-background" class="center-square"></div>
       <div id="soccer-ball-button-prev" class="soccer-ball-button hidden">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="10" fill="white" />
           <path
             fill="white"

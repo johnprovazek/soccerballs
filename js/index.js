@@ -67,6 +67,7 @@ const camera = new THREE.PerspectiveCamera(fov, initialAspectRatio, 1, 10);
 camera.position.set(0, 0, distance);
 scene.add(camera);
 const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.domElement.id = "three-js-canvas";
 renderer.setSize(container.clientWidth, container.clientHeight);
 container.appendChild(renderer.domElement);
 const controls = new TrackballControls(camera, renderer.domElement);
@@ -85,13 +86,6 @@ window.onload = () => {
     if (mode != "debug" && soccerBalls["designs"].some((d) => d.name.toLowerCase() === "debug")) {
       let debugIndex = soccerBalls["designs"].findIndex((d) => d.name.toLowerCase() === "debug");
       soccerBalls["designs"].splice(debugIndex, 1);
-    }
-    // Making the soccer ball buttons visible if there is more than one design.
-    if (soccerBalls["designs"].length > 1) {
-      const buttons = document.querySelectorAll(".soccer-ball-button");
-      buttons.forEach((button) => {
-        button.classList.remove("hidden");
-      });
     }
     loadDefaultTexture(); // Loads default textures to be overwritten.
     loadDefaultMaterial(); // Loads default materials to be overwritten.
@@ -238,6 +232,9 @@ function loadSoccerBall(index) {
   }
   // Loading textures and materials if missing images and updating the mesh if not.
   if (missingImages.length) {
+    document.getElementById("loading-symbol-container").classList.remove("hidden");
+    document.getElementById("soccer-ball-viewer-container").classList.remove("grab-cursor");
+    document.getElementById("three-js-canvas").classList.add("blur");
     // Need to load the stitch textures prior to loading panel textures.
     if ((mode === "stitch" || mode === "debug") && stitchImages.some((s) => s === null)) {
       let stitchImagesLoaded = 0;
@@ -374,6 +371,15 @@ function loadSoccerBall(index) {
     soccerBallName.textContent = name.length > 16 ? name.slice(0, 16) : name;
     // Updating the soccer ball index.
     soccerBallIndex = index;
+    // Making the soccer ball buttons visible if there is more than one design.
+    if (soccerBalls["designs"].length > 1) {
+      document.querySelectorAll(".soccer-ball-button").forEach((button) => {
+        button.classList.remove("hidden");
+      });
+    }
+    document.getElementById("loading-symbol-container").classList.add("hidden");
+    document.getElementById("soccer-ball-viewer-container").classList.add("grab-cursor");
+    document.getElementById("three-js-canvas").classList.remove("blur");
   }
 }
 

@@ -12,26 +12,52 @@ body {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.blur {
+  filter: blur(2px);
+}
+
+.grab-cursor {
   cursor: grab;
 }
-#soccer-ball-viewer-container:active {
+
+.grab-cursor:active {
   cursor: grabbing;
 }
 
-#soccer-ball-viewer-background {
+.center-square {
   height: 100dvmin;
   width: 100dvmin;
   left: 50%;
   top: 50vh;
   transform: translate(-50%, -50%);
   position: absolute;
-  background: radial-gradient(circle, rgba(119, 119, 119, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+#loading-symbol > circle {
+  transform-origin: center;
+  animation: rotate 0.8s linear infinite;
+}
+#loading-symbol-container {
+  z-index: 1;
+}
+
+#soccer-ball-viewer-background {
   z-index: -1;
+  background: radial-gradient(circle, rgba(119, 119, 119, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
 }
 
 .soccer-ball-button {
+  z-index: 1;
   position: absolute;
   cursor: pointer;
+  outline: none;
   clip-path: circle(50%);
   top: 50vh;
   -webkit-tap-highlight-color: transparent;
@@ -81,10 +107,6 @@ body {
   }
 }
 
-.soccer-ball-button {
-  outline: none;
-}
-
 #soccer-ball-button-prev {
   left: 0%;
 }
@@ -94,6 +116,7 @@ body {
 }
 
 #soccer-ball-name {
+  z-index: 1;
   position: fixed;
   bottom: 0%;
   opacity: 1;
