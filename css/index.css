@@ -1,5 +1,6 @@
 body {
   margin: 0px;
+  overflow: hidden;
   /* https://www.transparenttextures.com/ */
   background-color: #ffffff;
   background-image: url("../images/little-pluses.png");
