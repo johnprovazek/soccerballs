@@ -2,7 +2,7 @@ body {
   margin: 0px;
   /* https://www.transparenttextures.com/ */
   background-color: #ffffff;
-  background-image: url("/images/little-pluses.png");
+  background-image: url("../images/little-pluses.png");
   background-attachment: fixed;
 }
 
