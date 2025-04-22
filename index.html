@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <div id="soccer-ball-viewer-container">
-      <div id="loading-symbol-container" class="center-square">
-        <svg id="loading-symbol" viewBox="0 0 100 100" style="display: block">
+    <div id="soccer-ball-viewer">
+      <div id="loading-symbol" class="center-square">
+        <svg id="loading-symbol-svg" viewBox="0 0 100 100" style="display: block">
           <circle
             stroke-dasharray="94.24777960769379 33.41592653589793"
             r="20"
@@ -21,7 +21,7 @@
           ></circle>
         </svg>
       </div>
-      <div id="soccer-ball-viewer-background" class="center-square"></div>
+      <div id="soccer-ball-background" class="center-square"></div>
       <div id="soccer-ball-button-prev" class="soccer-ball-button hidden">
         <svg viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="10" fill="white" />
@@ -77,11 +77,13 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://unpkg.com/three@v0.162.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@v0.162.0/examples/jsm/"
+          "three": "./js/three.module.min.js",
+          "three-trackball-controls": "./js/trackball-controls.min.js"
         }
       }
     </script>
-    <script type="module" src="js/index.js"></script>
+    <script src="js/constants.js" type="module"></script>
+    <script src="js/utils.js" type="module"></script>
+    <script src="js/index.js" type="module"></script>
   </body>
 </html>

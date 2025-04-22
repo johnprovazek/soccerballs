@@ -1,5 +1,6 @@
 {
   "prettier.configPath": ".vscode/.prettierrc",
+  "prettier.ignorePath": ".vscode/.prettierignore",
   "files.exclude": {
     "local-dev/": true
   },

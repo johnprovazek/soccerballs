@@ -1,24 +1,41 @@
 import * as THREE from "three";
-import { TrackballControls } from "three/addons/controls/TrackballControls.js";
+import { TrackballControls } from "three-trackball-controls";
+import { getFov } from "./utils.js";
+import {
+  CAMERA_START_DISTANCE,
+  FAR_PLANE,
+  MARGIN_PERCENTAGE,
+  MAX_DISTANCE,
+  MIN_DISTANCE,
+  NEAR_PLANE,
+  PADDING_PERCENTAGE,
+  ROTATE_SPEED,
+  SOCCER_BALL_DIAMETER,
+  SOCCER_BALL_NAME_CHARACTER_LIMIT,
+  TRANSPARENT_PNG_URI,
+  ZOOM_SPEED,
+} from "./constants.js";
 
-// Viewer mode options: 'debug', 'stitch', or 'default'.
-// 'debug' : Adds debug features to help with development.
-// 'stitch' : Adds a stitching overlay to panels.
-// 'default' : No added styling or debugging features.
-let mode = "stitch";
+// HTML Elements.
+const soccerBallViewer = document.getElementById("soccer-ball-viewer");
+const prevButton = document.getElementById("soccer-ball-button-prev");
+const nextButton = document.getElementById("soccer-ball-button-next");
+const loadingSymbol = document.getElementById("loading-symbol");
+const soccerBallName = document.querySelector("#soccer-ball-name-text");
+const soccerBallButtons = document.querySelectorAll(".soccer-ball-button");
 
 // Geometry and texture variables.
-var soccerBalls; // JSON object containing position vertices, uv mapping, and texture information.
+let soccerBalls; // JSON object containing position vertices, UV mapping, and texture information.
 let soccerBallIndex = 0; // Index to track current soccer ball being displayed in viewer.
-var geometry = null; // Geometry containing soccer ball vertices.
-var mesh = null; // Soccer ball mesh.
-var materials = []; // List of materials for each soccer ball design.
+let geometry = null; // Geometry containing soccer ball vertices.
+let mesh = null; // Soccer ball mesh.
+let materials = []; // List of materials for each soccer ball design.
 let textures = {}; // Key-pair mapping of textures on the soccer balls.
 let images = []; // List of keys to images that have been loaded and updated in the textures and materials.
 let stitchImages = [null, null]; // Hexagon and pentagon stitch images.
 
 // Defining soccer ball hexagon and pentagon shape details.
-let shapes = [
+const shapes = [
   {
     type: "hexagon",
     count: 20,
@@ -48,83 +65,79 @@ let shapes = [
   },
 ];
 
-// Camera variables.
-let distance = 5; // Camera start distance.
-let diameter = 2; // Soccer ball diameter.
-let marginPercentage = 10; // Margin percentage between soccer ball and window border to allow for name and buttons.
-let paddingPercentage = 2; // Extra padding between soccer ball and window border.
-
 // Full height of the soccer ball and window border that is used to position the soccer ball in the viewer.
-let fullHeight = diameter / (1 - (marginPercentage + paddingPercentage) / 50);
+const fullHeight = SOCCER_BALL_DIAMETER / (1 - (MARGIN_PERCENTAGE + PADDING_PERCENTAGE) / 50);
+
+// Soccer ball viewer mode (debug, stitch, or default).
+const MODE = "stitch";
 
 // Setting up three.js
 const textureLoader = new THREE.TextureLoader();
-let container = document.getElementById("soccer-ball-viewer-container");
-let initialAspectRatio = container.clientWidth / container.clientHeight;
-let fov = getFov(fullHeight, initialAspectRatio, distance);
+const initialAspectRatio = soccerBallViewer.clientWidth / soccerBallViewer.clientHeight;
+const fieldOfView = getFov(fullHeight, initialAspectRatio, CAMERA_START_DISTANCE);
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(fov, initialAspectRatio, 1, 10);
-camera.position.set(0, 0, distance);
+const camera = new THREE.PerspectiveCamera(fieldOfView, initialAspectRatio, NEAR_PLANE, FAR_PLANE);
+camera.position.set(0, 0, CAMERA_START_DISTANCE);
 scene.add(camera);
 const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.domElement.id = "three-js-canvas";
-renderer.setSize(container.clientWidth, container.clientHeight);
-container.appendChild(renderer.domElement);
+const threeCanvas = renderer.domElement;
+renderer.setSize(soccerBallViewer.clientWidth, soccerBallViewer.clientHeight);
+soccerBallViewer.appendChild(renderer.domElement);
 const controls = new TrackballControls(camera, renderer.domElement);
-controls.minDistance = 2;
-controls.maxDistance = 8;
-controls.zoomSpeed = 0.8;
-controls.rotateSpeed = 2;
+controls.minDistance = MIN_DISTANCE;
+controls.maxDistance = MAX_DISTANCE;
+controls.zoomSpeed = ZOOM_SPEED;
+controls.rotateSpeed = ROTATE_SPEED;
 controls.noPan = true;
 
 // Window onload function.
 window.onload = () => {
-  loadJSON("data/soccerballs.json", function (text) {
-    // Parsing JSON file containing position vertices, uv mapping, and texture information into an object.
+  loadJSON("data/soccer-balls.json", (text) => {
+    // Parsing JSON file containing position vertices, UV mapping, and texture information into an object.
     soccerBalls = JSON.parse(text);
     // Removing debug soccer ball if not in debug mode.
-    if (mode != "debug" && soccerBalls["designs"].some((d) => d.name.toLowerCase() === "debug")) {
-      let debugIndex = soccerBalls["designs"].findIndex((d) => d.name.toLowerCase() === "debug");
+    if (MODE != "debug" && soccerBalls["designs"].some((d) => d.name.toLowerCase() === "debug")) {
+      const debugIndex = soccerBalls["designs"].findIndex((d) => d.name.toLowerCase() === "debug");
       soccerBalls["designs"].splice(debugIndex, 1);
     }
     loadDefaultTexture(); // Loads default textures to be overwritten.
     loadDefaultMaterial(); // Loads default materials to be overwritten.
-    loadGeometry(); // Handles loading position, uv mapping, and groups for each shape.
+    loadGeometry(); // Handles loading position, UV mapping, and groups for each shape.
     loadMesh(); // Loads mesh with default textures, material and geometry.
     loadSoccerBall(0); // Handles loading the soccer ball design.
     loadDebugging(); // Handles loading debugging features if they're enabled.
     animate(); // Runs the animation routine.
-    // Handles pressing the 'previous' soccer ball button.
-    document.getElementById("soccer-ball-button-prev").addEventListener("click", () => {
+    // Handles pressing the previous soccer ball button.
+    prevButton.addEventListener("click", () => {
       changeSoccerBall(-1);
     });
-    // Handles pressing the 'next' soccer ball button.
-    document.getElementById("soccer-ball-button-next").addEventListener("click", () => {
+    // Handles pressing the next soccer ball button.
+    nextButton.addEventListener("click", () => {
       changeSoccerBall(1);
     });
     // Adjusting the controls rotation speed based on the camera distance.
     controls.addEventListener("change", () => {
-      let cameraDistance = Math.sqrt(
+      const cameraDistance = Math.sqrt(
         Math.pow(camera.position.x, 2) + Math.pow(camera.position.y, 2) + Math.pow(camera.position.z, 2)
       );
-      controls.rotateSpeed = cameraDistance < 5 ? (cameraDistance - 2) / 3 + 0.5 : 2;
+      controls.rotateSpeed = cameraDistance < 5 ? (cameraDistance - 2) / 3 + 0.5 : ROTATE_SPEED;
     });
   });
 };
 
 // Window onresize function.
 window.onresize = () => {
-  let aspect = container.clientWidth / container.clientHeight;
-  camera.fov = getFov(fullHeight, aspect, distance);
+  const aspect = soccerBallViewer.clientWidth / soccerBallViewer.clientHeight;
+  camera.fov = getFov(fullHeight, aspect, CAMERA_START_DISTANCE);
   camera.aspect = aspect;
   camera.updateProjectionMatrix();
-  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setSize(soccerBallViewer.clientWidth, soccerBallViewer.clientHeight);
   controls.handleResize();
 };
 
 // Handles loading in a JSON file.
-function loadJSON(file, callback) {
-  let rawFile = new XMLHttpRequest();
+const loadJSON = (file, callback) => {
+  const rawFile = new XMLHttpRequest();
   rawFile.overrideMimeType("application/json");
   rawFile.open("GET", file, true);
   rawFile.onreadystatechange = function () {
@@ -133,46 +146,33 @@ function loadJSON(file, callback) {
     }
   };
   rawFile.send(null);
-}
-
-// Scales the camera field of view to keep the sphere in view at the starting distance.
-function getFov(diameter, aspect, distance) {
-  let a = diameter / 2;
-  let b = distance;
-  if (aspect < 1) {
-    a = a / aspect;
-  }
-  let c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-  return Math.asin(a / c) * (180 / Math.PI) * 2;
-}
+};
 
 // Loads default textures to be overwritten.
-function loadDefaultTexture() {
-  const transparentTexture = textureLoader.load(
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-  );
+const loadDefaultTexture = () => {
+  const transparentTexture = textureLoader.load(TRANSPARENT_PNG_URI);
   for (let i = 0; i < shapes.length; i++) {
-    let type = shapes[i]["type"];
-    let sides = shapes[i]["sides"];
+    const type = shapes[i]["type"];
+    const sides = shapes[i]["sides"];
     for (let j = 0; j < soccerBalls["designs"].length; j++) {
       for (let k = 0; k < soccerBalls["designs"][j][type].length; k++) {
-        let panelName = soccerBalls["designs"][j][type][k]["t"];
-        let key = panelName + "_" + type;
+        const panelName = soccerBalls["designs"][j][type][k]["t"];
+        const key = `${panelName}_${type}`;
         textures[key] = Array(sides).fill(transparentTexture);
       }
     }
   }
-}
+};
 
 // Loads default materials to be overwritten.
-function loadDefaultMaterial() {
+const loadDefaultMaterial = () => {
   for (let i = 0; i < soccerBalls["designs"].length; i++) {
-    let material = [];
+    const material = [];
     for (let j = 0; j < shapes.length; j++) {
-      let type = shapes[j]["type"];
+      const type = shapes[j]["type"];
       for (let k = 0; k < soccerBalls["designs"][i][type].length; k++) {
-        let panelName = soccerBalls["designs"][i][type][k]["t"];
-        let key = panelName + "_" + type;
+        const panelName = soccerBalls["designs"][i][type][k]["t"];
+        const key = `${panelName}_${type}`;
         material.push(
           new THREE.MeshBasicMaterial({
             map: textures[key][0],
@@ -184,10 +184,10 @@ function loadDefaultMaterial() {
       materials.push(material);
     }
   }
-}
+};
 
 // Handles loading position, uv mapping, and groups for each shape.
-function loadGeometry() {
+const loadGeometry = () => {
   geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(Float32Array.from(soccerBalls["object"]["v"]), 3));
   geometry.setAttribute("uv", new THREE.BufferAttribute(Float32Array.from(soccerBalls["object"]["uv"]), 3));
@@ -198,208 +198,234 @@ function loadGeometry() {
   let startIndex = 0;
   for (let i = 0; i < shapes.length; i++) {
     for (let j = 0; j < shapes[i]["count"]; j++) {
-      let endIndex = startIndex + shapes[i]["triangles"] * 3;
+      const endIndex = startIndex + shapes[i]["triangles"] * 3;
       geometry.addGroup(startIndex, endIndex, groupIndex);
       startIndex = endIndex;
       groupIndex = groupIndex + 1;
     }
   }
-}
+};
 
 // Loads mesh with default textures, material and geometry.
-function loadMesh() {
+const loadMesh = () => {
   mesh = new THREE.Mesh(geometry, materials[0]);
   scene.add(mesh);
-}
+};
+
+// Handles changing the soccer ball index.
+const changeSoccerBall = (value) => {
+  const totalSoccerBalls = soccerBalls["designs"].length;
+  soccerBallIndex = (soccerBallIndex + value + totalSoccerBalls) % totalSoccerBalls;
+  loadSoccerBall(soccerBallIndex);
+};
 
 // Handles loading the soccer ball design.
-function loadSoccerBall(index) {
-  // Checking for missing images.
-  let missingImages = [];
-  for (let i = 0; i < shapes.length; i++) {
-    let type = shapes[i]["type"];
-    for (let j = 0; j < soccerBalls["designs"][index][type].length; j++) {
-      let panelName = soccerBalls["designs"][index][type][j]["t"];
-      let key = panelName + "_" + type;
-      if (!images.includes(key) && !missingImages.some((m) => m.key === key)) {
-        missingImages.push({
-          key: key,
-          type: type,
-          path: "images/textures/panels/" + type + "/" + panelName + ".png",
-        });
-      }
+const loadSoccerBall = async (index) => {
+  try {
+    const missingImages = findMissingImages(index);
+    if (missingImages.length > 0) {
+      loadingSymbol.classList.remove("hidden");
+      soccerBallViewer.classList.remove("grab-cursor");
+      threeCanvas.classList.add("blur");
+      await loadStitchImages();
+      await loadPanelTextures(missingImages);
     }
+    const newMaterials = updateMaterials(index);
+    updateMeshAndUI(index, newMaterials);
+  } catch (error) {
+    console.error("Failed to load soccer ball design:", error);
+    loadingSymbol.classList.add("hidden");
   }
-  // Loading textures and materials if missing images and updating the mesh if not.
-  if (missingImages.length) {
-    document.getElementById("loading-symbol-container").classList.remove("hidden");
-    document.getElementById("soccer-ball-viewer-container").classList.remove("grab-cursor");
-    document.getElementById("three-js-canvas").classList.add("blur");
-    // Need to load the stitch textures prior to loading panel textures.
-    if ((mode === "stitch" || mode === "debug") && stitchImages.some((s) => s === null)) {
-      let stitchImagesLoaded = 0;
-      for (let i = 0; i < shapes.length; i++) {
-        const stitchImage = new Image();
-        stitchImage.onload = function () {
-          stitchImages[i] = stitchImage;
-          stitchImagesLoaded = stitchImagesLoaded + 1;
-          if (stitchImagesLoaded === stitchImages.length) {
-            loadTextures();
-          }
-        };
-        stitchImage.src = "images/textures/templates/" + shapes[i]["type"] + "/stitch.png";
-      }
-    } else {
-      loadTextures();
-    }
-  } else {
-    updateMesh();
-  }
-  // Loading textures.
-  function loadTextures() {
-    let numImagesLoaded = 0;
-    let numTexturesLoaded = 0;
-    let totalTextures = 0;
-    for (let i = 0; i < missingImages.length; i++) {
-      totalTextures = totalTextures + shapes.find((s) => s.type === missingImages[i]["type"])["sides"];
-    }
-    for (let i = 0; i < missingImages.length; i++) {
-      const image = new Image();
-      image.onload = function () {
-        // Rotating images and creating textures.
-        const rotationTextures = [];
-        const shapeType = missingImages[i]["type"];
-        var numSides = shapes.find((s) => s.type === shapeType)["sides"];
-        for (let j = 0; j < numSides; j++) {
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
-          canvas.width = image.width;
-          canvas.height = image.height;
-          context.translate(canvas.width / 2, canvas.height / 2);
-          context.rotate((Math.PI / 180) * (360 / numSides) * j * -1);
-          context.translate(-(canvas.width / 2), -(canvas.height / 2));
-          context.drawImage(image, 0, 0, canvas.width, canvas.height);
-          if (mode === "stitch" || mode === "debug") {
-            let stitchIndex = shapes.findIndex((s) => s.type === shapeType);
-            context.drawImage(stitchImages[stitchIndex], 0, 0, canvas.width, canvas.height);
-          }
-          if (mode === "debug") {
-            context.fillStyle = "white";
-            context.font = "600 80px Courier";
-            context.strokeStyle = "black";
-            context.textBaseline = "middle";
-            context.textAlign = "center";
-            context.lineWidth = 15;
-            let rotationNumberText = "R:" + j;
-            context.strokeText(rotationNumberText, canvas.width / 2, canvas.height / 2);
-            context.fillText(rotationNumberText, canvas.width / 2, canvas.height / 2);
-            // Adding numbers to indicate base of rotations.
-            for (let k = 0; k < numSides; k++) {
-              let rotationNum = (j + k) % numSides;
-              let rotationCoordinates = shapes.find((s) => s.type === shapeType)["coordinates"][k];
-              context.strokeText(
-                rotationNum,
-                canvas.width * rotationCoordinates[0],
-                canvas.height * rotationCoordinates[1]
-              );
-              context.fillText(
-                rotationNum,
-                canvas.width * rotationCoordinates[0],
-                canvas.height * rotationCoordinates[1]
-              );
-            }
-          }
-          const rotationTexture = textureLoader.load(canvas.toDataURL("image/png"), function (texture) {
-            numTexturesLoaded = numTexturesLoaded + 1;
-            if (numImagesLoaded === missingImages.length && numTexturesLoaded === totalTextures) {
-              updateMaterials();
-            }
+};
+
+// Checking for missing images.
+const findMissingImages = (designIndex) => {
+  const missingImages = [];
+  const design = soccerBalls.designs[designIndex];
+  for (const shape of shapes) {
+    const type = shape.type;
+    if (design[type]) {
+      for (const panel of design[type]) {
+        const panelName = panel.t;
+        const key = `${panelName}_${type}`;
+        if (!images.includes(key) && !missingImages.some((missingImage) => missingImage.key === key)) {
+          missingImages.push({
+            key: key,
+            type: type,
+            path: `images/textures/panels/${type}/${panelName}.png`,
           });
-          rotationTexture.colorSpace = THREE.SRGBColorSpace;
-          rotationTexture.center = new THREE.Vector2(0.5, 0.5);
-          rotationTexture.flipY = false;
-          rotationTextures.push(rotationTexture);
         }
-        images.push(missingImages[i]["key"]);
-        textures[missingImages[i]["key"]] = rotationTextures;
-        numImagesLoaded = numImagesLoaded + 1;
-        if (numImagesLoaded === missingImages.length && numTexturesLoaded === totalTextures) {
-          updateMaterials();
+      }
+    }
+  }
+  return missingImages;
+};
+
+// Loads stitch images.
+const loadStitchImages = () => {
+  if (MODE === "default" || !stitchImages.some((stitchImage) => stitchImage === null)) {
+    return Promise.resolve();
+  }
+  const promises = shapes.map((shape, i) => {
+    if (stitchImages[i] === null) {
+      return new Promise((resolve, reject) => {
+        const stitchImage = new Image();
+        stitchImage.onload = () => {
+          stitchImages[i] = stitchImage;
+          resolve();
+        };
+        stitchImage.onerror = reject;
+        stitchImage.src = `images/textures/templates/${shape.type}/stitch.png`;
+      });
+    }
+    return Promise.resolve();
+  });
+  return Promise.all(promises);
+};
+
+// Loads the base panel images and generates all the required rotated textures.
+const loadPanelTextures = (newImages) => {
+  const promises = newImages.map((newImageData) => {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = async () => {
+        try {
+          const shape = shapes.find((shape) => shape.type === newImageData.type);
+          const stitchIndex = MODE !== "default" ? shapes.findIndex((shape) => shape.type === newImageData.type) : -1;
+          const stitchImage = stitchIndex !== -1 ? stitchImages[stitchIndex] : null;
+          const rotatedTextures = await createRotatedTexturesForImage(image, shape, stitchImage);
+          images.push(newImageData.key);
+          textures[newImageData.key] = rotatedTextures;
+          resolve();
+        } catch (error) {
+          console.error(`Error processing image ${newImageData.key}:`, error);
+          reject(error);
         }
       };
-      image.src = missingImages[i]["path"];
+      image.onerror = (error) => {
+        console.error(`Failed to load image: ${newImageData.path}`);
+        reject(error);
+      };
+      image.src = newImageData.path;
+    });
+  });
+  return Promise.all(promises);
+};
+
+// Creates rotated textures for a base image.
+const createRotatedTexturesForImage = (baseImage, shape, stitchImage) => {
+  const numSides = shape.sides;
+  const texturePromises = [];
+  for (let i = 0; i < numSides; i++) {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    canvas.width = baseImage.width;
+    canvas.height = baseImage.height;
+    context.translate(canvas.width / 2, canvas.height / 2);
+    context.rotate((Math.PI / 180) * (360 / numSides) * i * -1);
+    context.translate(-canvas.width / 2, -canvas.height / 2);
+    context.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+    context.setTransform(1, 0, 0, 1, 0, 0);
+    if ((MODE === "stitch" || MODE === "debug") && stitchImage) {
+      context.drawImage(stitchImage, 0, 0, canvas.width, canvas.height);
     }
+    if (MODE === "debug") {
+      drawDebugInfo(context, canvas, i, shape);
+    }
+    const texturePromise = new Promise((resolve) => {
+      const dataURL = canvas.toDataURL("image/png");
+      textureLoader.load(dataURL, (texture) => {
+        texture.colorSpace = THREE.SRGBColorSpace;
+        texture.center = new THREE.Vector2(0.5, 0.5);
+        texture.flipY = false;
+        resolve(texture);
+      });
+    });
+    texturePromises.push(texturePromise);
   }
-  // Updating materials.
-  function updateMaterials() {
-    let material = [];
-    for (let i = 0; i < shapes.length; i++) {
-      let type = shapes[i]["type"];
-      for (let j = 0; j < soccerBalls["designs"][index][type].length; j++) {
-        let panelName = soccerBalls["designs"][index][type][j]["t"];
-        let key = panelName + "_" + type;
-        let rotation = soccerBalls["designs"][index][type][j]["r"];
-        if (rotation < 0 || rotation > shapes[i]["sides"] - 1) {
-          alert(
-            "Invalid rotation value (" +
-              rotation +
-              ") used. For " +
-              shapes[i]["name"] +
-              " shapes use a number from 0 to " +
-              String(shapes[i]["sides"] - 1) +
-              ". Setting rotation value to 0."
+  return Promise.all(texturePromises);
+};
+
+// Draws debug info on panel.
+const drawDebugInfo = (context, canvas, rotationIndex, shape) => {
+  context.fillStyle = "white";
+  context.font = "600 80px Courier";
+  context.strokeStyle = "black";
+  context.textBaseline = "middle";
+  context.textAlign = "center";
+  context.lineWidth = 15;
+  const rotationNumberText = `R:${rotationIndex}`;
+  context.strokeText(rotationNumberText, canvas.width / 2, canvas.height / 2);
+  context.fillText(rotationNumberText, canvas.width / 2, canvas.height / 2);
+  const numSides = shape.sides;
+  for (let k = 0; k < numSides; k++) {
+    const sideNum = (rotationIndex + k) % numSides;
+    const coords = shape.coordinates[k];
+    context.strokeText(sideNum, canvas.width * coords[0], canvas.height * coords[1]);
+    context.fillText(sideNum, canvas.width * coords[0], canvas.height * coords[1]);
+  }
+};
+
+// Creates the material array for the selected design using loaded textures.
+const updateMaterials = (designIndex) => {
+  const material = [];
+  const design = soccerBalls.designs[designIndex];
+  for (let i = 0; i < shapes.length; i++) {
+    const shape = shapes[i];
+    const type = shape.type;
+    if (design[type]) {
+      for (const panel of design[type]) {
+        const panelName = panel.t;
+        const key = `${panelName}_${type}`;
+        let rotation = panel.r;
+        if (rotation < 0 || rotation >= shape.sides) {
+          console.warn(
+            `Invalid rotation value (${rotation}) used for ${shape.name} (type ${type}). Expected 0 to ${
+              shape.sides - 1
+            }. Setting rotation to 0.`
           );
           rotation = 0;
         }
-        material.push(
-          new THREE.MeshBasicMaterial({
-            map: textures[key][rotation],
-            side: THREE.BackSide,
-          })
-        );
+        if (textures[key] && textures[key][rotation]) {
+          material.push(
+            new THREE.MeshBasicMaterial({
+              map: textures[key][rotation],
+              side: THREE.BackSide,
+            })
+          );
+        } else {
+          console.error(`Texture not found for key: ${key}, rotation: ${rotation}. Using placeholder.`);
+          material.push(new THREE.MeshBasicMaterial({ color: 0xff00ff, side: THREE.BackSide }));
+        }
       }
     }
-    materials[index] = material;
-    updateMesh();
   }
-  // Updating mesh.
-  function updateMesh() {
-    mesh.material = materials[index];
-    // Adding soccer ball name (Trims names longer than 16 characters).
-    const soccerBallName = document.querySelector("#soccer-ball-name-text");
-    let name = soccerBalls["designs"][index]["name"];
-    soccerBallName.textContent = name.length > 16 ? name.slice(0, 16) : name;
-    // Updating the soccer ball index.
-    soccerBallIndex = index;
-    // Making the soccer ball buttons visible if there is more than one design.
-    if (soccerBalls["designs"].length > 1) {
-      document.querySelectorAll(".soccer-ball-button").forEach((button) => {
-        button.classList.remove("hidden");
-      });
-    }
-    document.getElementById("loading-symbol-container").classList.add("hidden");
-    document.getElementById("soccer-ball-viewer-container").classList.add("grab-cursor");
-    document.getElementById("three-js-canvas").classList.remove("blur");
-  }
-}
+  return material;
+};
 
-// Handles changing the soccer ball index.
-function changeSoccerBall(value) {
-  let totalSoccerBalls = soccerBalls["designs"].length;
-  soccerBallIndex = soccerBallIndex + value;
-  if (soccerBallIndex > totalSoccerBalls - 1) {
-    soccerBallIndex = 0;
-  } else if (soccerBallIndex < 0) {
-    soccerBallIndex = totalSoccerBalls - 1;
-  }
-  loadSoccerBall(soccerBallIndex);
-}
+// Updates the mesh with new materials.
+const updateMeshAndUI = (designIndex, newMaterials) => {
+  mesh.material = newMaterials;
+  materials[designIndex] = newMaterials;
+  const design = soccerBalls.designs[designIndex];
+  const name = design.name;
+  soccerBallName.textContent =
+    name.length > SOCCER_BALL_NAME_CHARACTER_LIMIT ? name.slice(0, SOCCER_BALL_NAME_CHARACTER_LIMIT) : name;
+  soccerBallIndex = designIndex;
+  const showButtons = soccerBalls.designs.length > 1;
+  soccerBallButtons.forEach((button) => {
+    button.classList.toggle("hidden", !showButtons);
+  });
+  loadingSymbol.classList.add("hidden");
+  soccerBallViewer.classList.add("grab-cursor");
+  threeCanvas.classList.remove("blur");
+};
 
 // Handles loading debugging features if they're enabled.
-function loadDebugging() {
-  if (mode === "debug") {
+const loadDebugging = () => {
+  if (MODE === "debug") {
     // Adding wireframe to sphere.
-    var wireframe = new THREE.LineSegments(
+    const wireframe = new THREE.LineSegments(
       new THREE.WireframeGeometry(mesh.geometry),
       new THREE.LineBasicMaterial({ color: 0x000000 })
     );
@@ -408,14 +434,13 @@ function loadDebugging() {
     const axesHelper = new THREE.AxesHelper(5);
     scene.add(axesHelper);
     // Adding points to the viewer to help with vertices and texture mapping.
-    let group = new THREE.Group();
+    const group = new THREE.Group();
     scene.add(group);
-    const loader = new THREE.TextureLoader();
-    const dotTexture = loader.load("images/dot.png");
+    const dotTexture = textureLoader.load("images/dot.png");
     dotTexture.colorSpace = THREE.SRGBColorSpace;
     const dots = [];
-    let collection = [0, 15, 50, 79, 142, 160]; // Collection of vertices to plot on graph.
-    let pArray = geometry.attributes.position.array;
+    const collection = [0, 15, 50, 79, 142, 160]; // Collection of vertices to plot on graph.
+    const pArray = geometry.attributes.position.array;
     for (let i = 0; i < collection.length; i++) {
       let x = collection[i] * 3;
       const v = new THREE.Vector3(pArray[x], pArray[x + 1], pArray[x + 2]);
@@ -431,11 +456,11 @@ function loadDebugging() {
     const points = new THREE.Points(pointsGeometry, pointsMaterial);
     group.add(points);
   }
-}
+};
 
 // Runs the animation routine.
-function animate() {
+const animate = () => {
   controls.update();
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
-}
+};
