@@ -1,1 +1,8 @@
+# local development files
 local-dev/
+
+# dependencies
+node_modules/
+
+# build code
+dist/

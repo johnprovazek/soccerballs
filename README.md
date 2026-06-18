@@ -2,12 +2,12 @@
 
 ## Description
 
-This project was created to display prototype designs for soccer balls that follow the standard 32 piece design ([Truncated Icosahedron](https://en.wikipedia.org/wiki/Truncated_icosahedron)) built from 12 pentagons and 20 hexagons.
+This project was created to display prototype designs for soccer balls that follow the standard 32 piece design ([Truncated Icosahedron](https://en.wikipedia.org/wiki/Truncated_icosahedron)) built with 20 hexagons and 12 pentagons.
 This idea was inspired by the videos of [jonpaulsballs](https://www.youtube.com/@jonpaulsballs/videos) and his [tutorial](https://www.youtube.com/watch?v=TGMWMHw8OpA&ab_channel=jonpaulsballs) on how to build a standard 32 piece soccer ball.
-This project can be used to prototype designs before following his [tutorial](https://www.youtube.com/watch?v=TGMWMHw8OpA&ab_channel=jonpaulsballs) and building a soccer ball of your own design.
+This project can be used to prototype designs before following his [tutorial](https://www.youtube.com/watch?v=TGMWMHw8OpA&ab_channel=jonpaulsballs) and building a soccer ball of your own.
 A demo of this soccer ball prototype 3D viewer can be accessed at [johnprovazek.com/soccerballs](https://www.johnprovazek.com/soccerballs/).
 
-Built using vanilla JavaScript and the [three.js](https://threejs.org/) library.
+Built using Vite, TypeScript and the [three.js](https://threejs.org/) library.
 
 <div align="center">
   <picture>
@@ -17,20 +17,20 @@ Built using vanilla JavaScript and the [three.js](https://threejs.org/) library.
 
 ## Usage
 
-After cloning this repo navigate to the [templates](images/textures/templates/) directory.
-Here you will find a handful of helpful images to assist you with designing textures of your own.
-These images were created to to help with designing for the UV mapping between the soccer ball panel shapes and the textures.
+To get started designing your own soccer ball, you will need to create textures of your own.
+Start by navigating through the [hexagon](public/images/hexagon/) and [pentagon](public/images/pentagon/) directories.
+Within these directories you will find a handful of example textures that may assist you when creating textures of your own.
 
-It may also be helpful to look at the designs found in the [panels](images/textures/panels/) directory for inspiration.
+In addition to the example textures, there are also template textures in PNG and SVG formats.
+Each template texture has 12 points along the shape edges.
+These points can be used to line up the hexagon and pentagon shapes to create your own custom textures.
 
-Once you have designed your panels, place them in the appropriate subdirectory under the [panels](images/textures/panels/) directory to correspond with the shape.
-Note that this script is currently setup to only accept panels in the PNG format.
+Once you have designed your textures, place them in the appropriate [hexagon](public/images/hexagon/) and [pentagon](public/images/hexagon/) directories.
 
-Next you will need to reference these files in the [soccer-balls.json](images/data/soccer-balls.json) file.
-
-Each soccer ball design contains a name, hexagon array, and pentagon array.
-The hexagon and pentagon arrays contain the name of the texture file (without the file extension) and the rotation number for the texture.
-Follow the format of the [soccer-balls.json](images/data/soccer-balls.json) file when adding your own designs.
+Lastly, you will need to reference these files in [soccer-balls.json](public/data/soccer-balls.json).
+Follow the formatting of the example textures found there.
+Each soccer ball design should have a name, 20 hexagon panels, and 12 pentagon panels.
+Each panel should contain the name of the texture file, the rotation value, and an optional ID to help with debugging.
 
 ## Credits
 
@@ -41,7 +41,5 @@ On his website you can set the base polyhedron to _icosahedron_ and the conway p
 
 ## Bugs & Improvements
 
-- The UV mapping for the pentagon shape could use improvement to match the "inflation" in the hexagon UV mapping. Setting this project's mode to "debug" will clearly show this issue.
-- Add the panel number in the debug overlay.
 - The stitching image could use improvement ( adobe illustrator ).
 - Design real prototypes with clean SVGs ( adobe illustrator ).

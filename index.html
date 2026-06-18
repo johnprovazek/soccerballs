@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>soccerballs</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
@@ -69,21 +70,12 @@
             font-family="Courier"
             stroke="black"
             stroke-width="2"
+            paint-order="stroke"
             style="paint-order: stroke"
           ></text>
         </svg>
       </div>
     </div>
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "./js/three.module.min.js",
-          "three-trackball-controls": "./js/trackball-controls.min.js"
-        }
-      }
-    </script>
-    <script src="js/constants.js" type="module"></script>
-    <script src="js/utils.js" type="module"></script>
-    <script src="js/index.js" type="module"></script>
+    <script type="module" src="/src/index.ts"></script>
   </body>
 </html>

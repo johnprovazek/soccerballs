@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "esbenp.prettier-vscode",
-    "quick-lint.quick-lint-js",
-    "htmlhint.vscode-htmlhint"
-  ]
+  "recommendations": ["esbenp.prettier-vscode", "htmlhint.vscode-htmlhint"]
 }
