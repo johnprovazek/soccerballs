@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { TrackballControls } from "three/addons/controls/TrackballControls.js";
-import { createTextureFromCanvas, drawStrokedText, fetchJSON, getBaseUrl, getFov, loadImage } from "./utils.js";
+import { createTextureFromCanvas, drawStrokedText, fetchJSON, getBaseUrl, getFov, scaleUV } from "./utils.js";
 import * as CONFIG from "./constants.js";
 import type { MissingTexture, Shape, SoccerBallData } from "./types.js";
 
@@ -121,7 +121,7 @@ const initializeStitchTextures = async (): Promise<void> => {
   await Promise.all(
     CONFIG.SHAPES.map(async (shape) => {
       try {
-        const image = await loadImage(`images/${shape.type}/stitch/stitch.png`);
+        const image = await loadImage(`images/${shape.type}/stitch.svg`);
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d")!;
         canvas.width = image.width;
@@ -139,7 +139,8 @@ const initializeStitchTextures = async (): Promise<void> => {
 const buildGeometry = (data: SoccerBallData): THREE.BufferGeometry => {
   const newGeometry = new THREE.BufferGeometry();
   newGeometry.setAttribute("position", new THREE.BufferAttribute(Float32Array.from(data.v), 3));
-  newGeometry.setAttribute("uv", new THREE.BufferAttribute(Float32Array.from(data.uv), 3));
+  const scaledUV = scaleUV(Float32Array.from(data.uv), CONFIG.UV_SCALE);
+  newGeometry.setAttribute("uv", new THREE.BufferAttribute(scaledUV, 3));
   newGeometry.computeVertexNormals();
   let groupIndex = 0;
   let startIndex = 0;
@@ -211,14 +212,13 @@ const findMissingBaseTextures = (): MissingTexture[] => {
   const missingTextures: MissingTexture[] = [];
   const design = soccerBallsData.designs[soccerBallIndex];
   CONFIG.SHAPES.forEach((shape) => {
-    const path = design.name === "DEBUG" ? `images/${shape.type}/debug` : `images/${shape.type}`;
     design[shape.type].forEach((panel) => {
       const key = `${panel.d}_${shape.type}`;
       if (!baseTextureMap[key] && !missingTextures.some((image) => image.key === key)) {
         missingTextures.push({
           key,
           type: shape.type,
-          path: `${path}/${panel.d}`,
+          path: `images/${shape.type}/${panel.d}`,
         });
       }
     });
@@ -327,8 +327,8 @@ const getDebugTexture = (shape: Shape, id: string, rotation: number): THREE.Text
   }
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d")!;
-  canvas.width = CONFIG.DEBUG_CANVAS_SIZE;
-  canvas.height = CONFIG.DEBUG_CANVAS_SIZE;
+  canvas.width = CONFIG.TEXTURE_SIZE;
+  canvas.height = CONFIG.TEXTURE_SIZE;
   Object.assign(context, CONFIG.DEBUG_TEXT_STYLE);
   const centerX = canvas.width / 2;
   const centerY = canvas.height / 2;
@@ -380,4 +380,55 @@ const addDebuggingFeatures = (debugGeometry: THREE.BufferGeometry): void => {
   const debugPointsGroup = new THREE.Group();
   debugPointsGroup.add(new THREE.Points(pointsGeometry, pointsMaterial));
   debugMesh.add(debugPointsGroup);
+};
+
+// Loads an image from path, with optimization for SVGs.
+const loadImage = (url: string): Promise<HTMLImageElement> => {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.crossOrigin = "anonymous";
+    // Handling SVG image types.
+    if (url.toLowerCase().endsWith(".svg")) {
+      fetch(url)
+        .then((response) => {
+          if (!response.ok) throw new Error("Failed to fetch SVG file");
+          return response.text();
+        })
+        .then((svgText) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(svgText, "image/svg+xml");
+          const svgElement = doc.querySelector("svg");
+          if (svgElement) {
+            if (!svgElement.hasAttribute("viewBox")) {
+              const width = svgElement.getAttribute("width") || `${CONFIG.TEXTURE_SIZE_FALLBACK}`;
+              const height = svgElement.getAttribute("height") || `${CONFIG.TEXTURE_SIZE_FALLBACK}`;
+              svgElement.setAttribute("viewBox", `0 0 ${width} ${height}`);
+            }
+            svgElement.setAttribute("width", `${CONFIG.TEXTURE_SIZE}`);
+            svgElement.setAttribute("height", `${CONFIG.TEXTURE_SIZE}`);
+            const serializedSvg = new XMLSerializer().serializeToString(doc);
+            const blob = new Blob([serializedSvg], { type: "image/svg+xml" });
+            image.src = URL.createObjectURL(blob);
+          } else {
+            image.src = url;
+          }
+        })
+        .catch((err) => {
+          console.warn("SVG parsing failed, falling back to standard load", err);
+          image.src = url;
+        });
+    } else {
+      // Handling standard image types.
+      image.src = url;
+    }
+    image.onload = () => {
+      if (image.src.startsWith("blob:")) {
+        URL.revokeObjectURL(image.src);
+      }
+      resolve(image);
+    };
+    image.onerror = (err) => {
+      reject(err);
+    };
+  });
 };

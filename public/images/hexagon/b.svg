@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+   <style>
+      :root {
+         --color-base: #A6C586;
+         --color-primary: #D0DE9E;
+         --color-secondary: #FAF6B5;
+         --color-detail: #F5F5F5;
+      }
+      .bg { fill: var(--color-base); }
+      .stroke-primary { fill: none; stroke: var(--color-primary); stroke-width: 120;}
+      .stroke-secondary { fill: none; stroke: var(--color-secondary); stroke-width: 60;}
+      .stroke-detail { fill: none; stroke: var(--color-detail); stroke-width: 15;}
+   </style>
+   <defs>
+      <g id="hexagon-b-group">
+         <path d="M 597.333 68.595 C 597.333 303.595 413.000 350.920 368 428.862 322.115 508.318 374.183 690.103 170.667 807.603"/>
+         <path d="M 853.333 216.397 C 680.128 316.397 689.000 375.168 704 401.149 719.000 427.130 765.462 464.198 938.667 364.198"/>
+         <path d="M 170.667 216.397 C 402.761 350.396 402.761 673.604 170.667 807.603" transform="rotate(240 512 512)" />
+         <path d="M 85.333 364.198 C 201.38 431.198 201.38 592.802 85.333 659.802"/>
+         <path d="M 85.333 364.198 C 201.38 431.198 201.38 592.802 85.333 659.802" transform="rotate(240 512 512)" />
+         <path d="M 85.333 364.198 C 201.38 431.198 201.38 592.802 85.333 659.802" transform="rotate(60 512 512)" />
+      </g>
+   </defs>
+   <rect class="bg" width="1024" height="1024"/>
+   <use href="#hexagon-b-group" class="stroke-primary" />
+   <use href="#hexagon-b-group" class="stroke-secondary"/>
+   <use href="#hexagon-b-group" class="stroke-detail"/>
+</svg>

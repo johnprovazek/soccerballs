@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+   <style>
+      :root {
+         --color-base: #A6C586;
+         --color-primary: #D0DE9E;
+         --color-secondary: #FAF6B5;
+         --color-detail: #F5F5F5;
+      }
+      .bg { fill: var(--color-base); }
+      .stroke-primary { fill: none; stroke: var(--color-primary); stroke-width: 120;}
+      .stroke-secondary { fill: none; stroke: var(--color-secondary); stroke-width: 60;}
+      .stroke-detail { fill: none; stroke: var(--color-detail); stroke-width: 15;}
+   </style>
+   <defs>
+      <g id="pentagon-b-group">
+         <path d="M 426.667 159.647 C 426.667 354.647 555.732 403.159 583.544 488.754 611.356 574.349 535.454 689.460 650.072 847.218"/>
+         <path d="M 203.261 321.96 C 444.82953 400.45022 523.22542 641.72748 373.928 847.218"/>
+         <path d="M 150.523 484.274 C 271.30713 523.51930 310.50485 644.15793 235.856 746.903"/>
+         <path d="M 150.523 484.274 C 271.30713 523.51930 310.50485 644.15793 235.856 746.903" transform="rotate(144 512 512)" />
+         <path d="M 150.523 484.274 C 271.30713 523.51930 310.50485 644.15793 235.856 746.903" transform="rotate(216 512 512)" />
+      </g>
+   </defs>
+   <rect class="bg" width="1024" height="1024"/>
+   <use href="#pentagon-b-group" class="stroke-primary" />
+   <use href="#pentagon-b-group" class="stroke-secondary"/>
+   <use href="#pentagon-b-group" class="stroke-detail"/>
+</svg>

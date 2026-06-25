@@ -38,12 +38,15 @@ export const getFov = (diameter: number, aspect: number, distance: number): numb
   return Math.asin(a / c) * (180 / Math.PI) * 2;
 };
 
-// Loads an HTML image from path.
-export const loadImage = (src: string): Promise<HTMLImageElement> => {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error(`Failed to load image asset at path: ${src}`));
-    image.src = src;
-  });
+// Scales UV coordinates toward the center point to fix texture edge gaps.
+export const scaleUV = (uvArray: Float32Array, uvScale: number = 0.995): Float32Array => {
+  for (let i = 0; i < uvArray.length; i += 3) {
+    let u = uvArray[i];
+    let v = uvArray[i + 1];
+    u = (u - 0.5) * uvScale + 0.5;
+    v = (v - 0.5) * uvScale + 0.5;
+    uvArray[i] = u;
+    uvArray[i + 1] = v;
+  }
+  return uvArray;
 };

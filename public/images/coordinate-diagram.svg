@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="2448" height="1224" viewBox="-100 -100 2448 1224" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        :root {
+            --color-background: #FFFFFF;
+            --color-dot: #4A4A4A;
+            --color-label: #000000;
+        }
+        .bg { fill: var(--color-background); }
+        .dot { r: 8px; fill: var(--color-dot); }
+        .label-coordinate {
+            fill: var(--color-label);
+            font-size: 20px;
+            font-family: monospace;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+        .label-edge {
+            fill: var(--color-label);
+            font-size: 80px;
+            font-family: monospace;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+    </style>
+    <rect class="bg" x="-100" y="-100" width="2448" height="1224"/>
+    <g id="hexagon-readme">
+        <text x="512" y="-6.4" class="label-edge">A</text>
+        <text x="961" y="252.8" class="label-edge">B</text>
+        <text x="961" y="771.2" class="label-edge">C</text>
+        <text x="512" y="1030.4" class="label-edge">D</text>
+        <text x="63" y="771.2" class="label-edge">E</text>
+        <text x="63" y="252.8" class="label-edge">F</text>
+        <circle cx="256" cy="68.594688" class="dot" />
+        <text x="231" y="25.3" class="label-coordinate">A0/F12</text>
+        <circle cx="298.667008" cy="68.594688" class="dot" />
+        <text x="298.7" y="43.6" class="label-coordinate">A1</text>
+        <circle cx="341.332992" cy="68.594688" class="dot" />
+        <text x="341.3" y="43.6" class="label-coordinate">A2</text>
+        <circle cx="384" cy="68.594688" class="dot" />
+        <text x="384.0" y="43.6" class="label-coordinate">A3</text>
+        <circle cx="426.667008" cy="68.594688" class="dot" />
+        <text x="426.7" y="43.6" class="label-coordinate">A4</text>
+        <circle cx="469.332992" cy="68.594688" class="dot" />
+        <text x="469.3" y="43.6" class="label-coordinate">A5</text>
+        <circle cx="512" cy="68.594688" class="dot" />
+        <text x="512.0" y="43.6" class="label-coordinate">A6</text>
+        <circle cx="554.667008" cy="68.594688" class="dot" />
+        <text x="554.7" y="43.6" class="label-coordinate">A7</text>
+        <circle cx="597.332992" cy="68.594688" class="dot" />
+        <text x="597.3" y="43.6" class="label-coordinate">A8</text>
+        <circle cx="640" cy="68.594688" class="dot" />
+        <text x="640.0" y="43.6" class="label-coordinate">A9</text>
+        <circle cx="682.667008" cy="68.594688" class="dot" />
+        <text x="682.7" y="43.6" class="label-coordinate">A10</text>
+        <circle cx="725.332992" cy="68.594688" class="dot" />
+        <text x="725.3" y="43.6" class="label-coordinate">A11</text>
+        <circle cx="768" cy="68.594688" class="dot" />
+        <text x="793" y="25.3" class="label-coordinate">B0/A12</text>
+        <circle cx="789.332992" cy="105.544704" class="dot" />
+        <text x="811.0" y="93.0" class="label-coordinate">B1</text>
+        <circle cx="810.667008" cy="142.495744" class="dot" />
+        <text x="832.3" y="130.0" class="label-coordinate">B2</text>
+        <circle cx="832" cy="179.44576" class="dot" />
+        <text x="853.7" y="166.9" class="label-coordinate">B3</text>
+        <circle cx="853.332992" cy="216.3968" class="dot" />
+        <text x="875.0" y="203.9" class="label-coordinate">B4</text>
+        <circle cx="874.667008" cy="253.346816" class="dot" />
+        <text x="896.3" y="240.8" class="label-coordinate">B5</text>
+        <circle cx="896" cy="290.297856" class="dot" />
+        <text x="917.7" y="277.8" class="label-coordinate">B6</text>
+        <circle cx="917.332992" cy="327.247872" class="dot" />
+        <text x="939.0" y="314.7" class="label-coordinate">B7</text>
+        <circle cx="938.667008" cy="364.197888" class="dot" />
+        <text x="960.3" y="351.7" class="label-coordinate">B8</text>
+        <circle cx="960" cy="401.148928" class="dot" />
+        <text x="981.7" y="388.6" class="label-coordinate">B9</text>
+        <circle cx="981.332992" cy="438.098944" class="dot" />
+        <text x="1003.0" y="425.6" class="label-coordinate">B10</text>
+        <circle cx="1002.667008" cy="475.049984" class="dot" />
+        <text x="1024.3" y="462.5" class="label-coordinate">B11</text>
+        <circle cx="1024" cy="512" class="dot" />
+        <text x="1074" y="512" class="label-coordinate">C0/B12</text>
+        <circle cx="1002.667008" cy="548.950016" class="dot" />
+        <text x="1024.3" y="561.5" class="label-coordinate">C1</text>
+        <circle cx="981.332992" cy="585.901056" class="dot" />
+        <text x="1003.0" y="598.4" class="label-coordinate">C2</text>
+        <circle cx="960" cy="622.851072" class="dot" />
+        <text x="981.7" y="635.4" class="label-coordinate">C3</text>
+        <circle cx="938.667008" cy="659.802112" class="dot" />
+        <text x="960.3" y="672.3" class="label-coordinate">C4</text>
+        <circle cx="917.332992" cy="696.752128" class="dot" />
+        <text x="939.0" y="709.3" class="label-coordinate">C5</text>
+        <circle cx="896" cy="733.702144" class="dot" />
+        <text x="917.7" y="746.2" class="label-coordinate">C6</text>
+        <circle cx="874.667008" cy="770.653184" class="dot" />
+        <text x="896.3" y="783.2" class="label-coordinate">C7</text>
+        <circle cx="853.332992" cy="807.6032" class="dot" />
+        <text x="875.0" y="820.1" class="label-coordinate">C8</text>
+        <circle cx="832" cy="844.55424" class="dot" />
+        <text x="853.7" y="857.1" class="label-coordinate">C9</text>
+        <circle cx="810.667008" cy="881.504256" class="dot" />
+        <text x="832.3" y="894.0" class="label-coordinate">C10</text>
+        <circle cx="789.332992" cy="918.455296" class="dot" />
+        <text x="811.0" y="931.0" class="label-coordinate">C11</text>
+        <circle cx="768" cy="955.405312" class="dot" />
+        <text x="793" y="998.7" class="label-coordinate">D0/C12</text>
+        <circle cx="725.332992" cy="955.405312" class="dot" />
+        <text x="725.3" y="980.4" class="label-coordinate">D1</text>
+        <circle cx="682.667008" cy="955.405312" class="dot" />
+        <text x="682.7" y="980.4" class="label-coordinate">D2</text>
+        <circle cx="640" cy="955.405312" class="dot" />
+        <text x="640.0" y="980.4" class="label-coordinate">D3</text>
+        <circle cx="597.332992" cy="955.405312" class="dot" />
+        <text x="597.3" y="980.4" class="label-coordinate">D4</text>
+        <circle cx="554.667008" cy="955.405312" class="dot" />
+        <text x="554.7" y="980.4" class="label-coordinate">D5</text>
+        <circle cx="512" cy="955.405312" class="dot" />
+        <text x="512.0" y="980.4" class="label-coordinate">D6</text>
+        <circle cx="469.332992" cy="955.405312" class="dot" />
+        <text x="469.3" y="980.4" class="label-coordinate">D7</text>
+        <circle cx="426.667008" cy="955.405312" class="dot" />
+        <text x="426.7" y="980.4" class="label-coordinate">D8</text>
+        <circle cx="384" cy="955.405312" class="dot" />
+        <text x="384.0" y="980.4" class="label-coordinate">D9</text>
+        <circle cx="341.332992" cy="955.405312" class="dot" />
+        <text x="341.3" y="980.4" class="label-coordinate">D10</text>
+        <circle cx="298.667008" cy="955.405312" class="dot" />
+        <text x="298.7" y="980.4" class="label-coordinate">D11</text>
+        <circle cx="256" cy="955.405312" class="dot" />
+        <text x="231" y="998.7" class="label-coordinate">E0/D12</text>
+        <circle cx="234.667008" cy="918.455296" class="dot" />
+        <text x="213.0" y="931.0" class="label-coordinate">E1</text>
+        <circle cx="213.332992" cy="881.504256" class="dot" />
+        <text x="191.7" y="894.0" class="label-coordinate">E2</text>
+        <circle cx="192" cy="844.55424" class="dot" />
+        <text x="170.4" y="857.1" class="label-coordinate">E3</text>
+        <circle cx="170.667008" cy="807.6032" class="dot" />
+        <text x="149.0" y="820.1" class="label-coordinate">E4</text>
+        <circle cx="149.332992" cy="770.653184" class="dot" />
+        <text x="127.7" y="783.2" class="label-coordinate">E5</text>
+        <circle cx="128" cy="733.702144" class="dot" />
+        <text x="106.4" y="746.2" class="label-coordinate">E6</text>
+        <circle cx="106.667008" cy="696.752128" class="dot" />
+        <text x="85.0" y="709.3" class="label-coordinate">E7</text>
+        <circle cx="85.332992" cy="659.802112" class="dot" />
+        <text x="63.7" y="672.3" class="label-coordinate">E8</text>
+        <circle cx="64" cy="622.851072" class="dot" />
+        <text x="42.4" y="635.4" class="label-coordinate">E9</text>
+        <circle cx="42.667008" cy="585.901056" class="dot" />
+        <text x="21.0" y="598.4" class="label-coordinate">E10</text>
+        <circle cx="21.332992" cy="548.950016" class="dot" />
+        <text x="-0.3" y="561.5" class="label-coordinate">E11</text>
+        <circle cx="0" cy="512" class="dot" />
+        <text x="-50.0" y="512" class="label-coordinate">F0/E12</text>
+        <circle cx="21.332992" cy="475.049984" class="dot" />
+        <text x="-0.3" y="462.5" class="label-coordinate">F1</text>
+        <circle cx="42.667008" cy="438.098944" class="dot" />
+        <text x="21.0" y="425.6" class="label-coordinate">F2</text>
+        <circle cx="64" cy="401.148928" class="dot" />
+        <text x="42.4" y="388.6" class="label-coordinate">F3</text>
+        <circle cx="85.332992" cy="364.197888" class="dot" />
+        <text x="63.7" y="351.7" class="label-coordinate">F4</text>
+        <circle cx="106.667008" cy="327.247872" class="dot" />
+        <text x="85.0" y="314.7" class="label-coordinate">F5</text>
+        <circle cx="128" cy="290.297856" class="dot" />
+        <text x="106.4" y="277.8" class="label-coordinate">F6</text>
+        <circle cx="149.332992" cy="253.346816" class="dot" />
+        <text x="127.7" y="240.8" class="label-coordinate">F7</text>
+        <circle cx="170.667008" cy="216.3968" class="dot" />
+        <text x="149.0" y="203.9" class="label-coordinate">F8</text>
+        <circle cx="192" cy="179.44576" class="dot" />
+        <text x="170.4" y="166.9" class="label-coordinate">F9</text>
+        <circle cx="213.332992" cy="142.495744" class="dot" />
+        <text x="191.7" y="130.0" class="label-coordinate">F10</text>
+        <circle cx="234.667008" cy="105.544704" class="dot" />
+        <text x="213.0" y="93.0" class="label-coordinate">F11</text>
+    </g>
+    <g id="pentagon-readme" transform="translate(1224, 0)">
+        <text x="512" y="84.6" class="label-edge">A</text>
+        <text x="918.4" y="379.9" class="label-edge">B</text>
+        <text x="763.2" y="857.7" class="label-edge">C</text>
+        <text x="260.8" y="857.7" class="label-edge">D</text>
+        <text x="105.6" y="379.9" class="label-edge">E</text>
+        <circle cx="256" cy="159.64672" class="dot" />
+        <text x="226.6" y="119.2" class="label-coordinate">A0/E12</text>
+        <circle cx="298.667008" cy="159.64672" class="dot" />
+        <text x="298.7" y="129.6" class="label-coordinate">A1</text>
+        <circle cx="341.333" cy="159.64672" class="dot" />
+        <text x="341.3" y="129.6" class="label-coordinate">A2</text>
+        <circle cx="384" cy="159.64672" class="dot" />
+        <text x="384.0" y="129.6" class="label-coordinate">A3</text>
+        <circle cx="426.667008" cy="159.64672" class="dot" />
+        <text x="426.7" y="129.6" class="label-coordinate">A4</text>
+        <circle cx="469.333" cy="159.64672" class="dot" />
+        <text x="469.3" y="129.6" class="label-coordinate">A5</text>
+        <circle cx="512" cy="159.64672" class="dot" />
+        <text x="512.0" y="129.6" class="label-coordinate">A6</text>
+        <circle cx="554.667008" cy="159.64672" class="dot" />
+        <text x="554.7" y="129.6" class="label-coordinate">A7</text>
+        <circle cx="597.333" cy="159.64672" class="dot" />
+        <text x="597.3" y="129.6" class="label-coordinate">A8</text>
+        <circle cx="640" cy="159.64672" class="dot" />
+        <text x="640.0" y="129.6" class="label-coordinate">A9</text>
+        <circle cx="682.667008" cy="159.64672" class="dot" />
+        <text x="682.7" y="129.6" class="label-coordinate">A10</text>
+        <circle cx="725.333" cy="159.64672" class="dot" />
+        <text x="725.3" y="129.6" class="label-coordinate">A11</text>
+        <circle cx="768" cy="159.64672" class="dot" />
+        <text x="797.4" y="119.2" class="label-coordinate">B0/A12</text>
+        <circle cx="781.185024" cy="200.224768" class="dot" />
+        <text x="805.0" y="190.0" class="label-coordinate">B1</text>
+        <circle cx="794.369024" cy="240.80384" class="dot" />
+        <text x="818.0" y="230.0" class="label-coordinate">B2</text>
+        <circle cx="807.554048" cy="281.381888" class="dot" />
+        <text x="831.0" y="271.0" class="label-coordinate">B3</text>
+        <circle cx="820.739072" cy="321.959936" class="dot" />
+        <text x="844.0" y="311.0" class="label-coordinate">B4</text>
+        <circle cx="833.923072" cy="362.539008" class="dot" />
+        <text x="857.0" y="352.0" class="label-coordinate">B5</text>
+        <circle cx="847.108096" cy="403.117056" class="dot" />
+        <text x="870.0" y="393.0" class="label-coordinate">B6</text>
+        <circle cx="860.29312" cy="443.695104" class="dot" />
+        <text x="884.0" y="433.0" class="label-coordinate">B7</text>
+        <circle cx="873.47712" cy="484.274176" class="dot" />
+        <text x="897.0" y="474.0" class="label-coordinate">B8</text>
+        <circle cx="886.662144" cy="524.852224" class="dot" />
+        <text x="910.0" y="514.0" class="label-coordinate">B9</text>
+        <circle cx="899.847168" cy="565.430272" class="dot" />
+        <text x="923.0" y="555.0" class="label-coordinate">B10</text>
+        <circle cx="913.031168" cy="606.009344" class="dot" />
+        <text x="937.0" y="596.0" class="label-coordinate">B11</text>
+        <circle cx="926.216192" cy="646.587392" class="dot" />
+        <text x="973.8" y="662" class="label-coordinate">C0/B12</text>
+        <circle cx="891.698176" cy="671.666176" class="dot" />
+        <text x="906.4" y="691.9" class="label-coordinate">C1</text>
+        <circle cx="857.18016" cy="696.74496" class="dot" />
+        <text x="871.9" y="717.0" class="label-coordinate">C2</text>
+        <circle cx="822.662144" cy="721.823744" class="dot" />
+        <text x="837.4" y="742.0" class="label-coordinate">C3</text>
+        <circle cx="788.144128" cy="746.902528" class="dot" />
+        <text x="802.8" y="767.1" class="label-coordinate">C4</text>
+        <circle cx="753.626112" cy="771.981312" class="dot" />
+        <text x="768.3" y="792.2" class="label-coordinate">C5</text>
+        <circle cx="719.108096" cy="797.060096" class="dot" />
+        <text x="733.8" y="817.3" class="label-coordinate">C6</text>
+        <circle cx="684.59008" cy="822.13888" class="dot" />
+        <text x="699.3" y="842.4" class="label-coordinate">C7</text>
+        <circle cx="650.072064" cy="847.217664" class="dot" />
+        <text x="664.8" y="867.4" class="label-coordinate">C8</text>
+        <circle cx="615.554048" cy="872.296448" class="dot" />
+        <text x="630.2" y="892.5" class="label-coordinate">C9</text>
+        <circle cx="581.036032" cy="897.375232" class="dot" />
+        <text x="595.7" y="917.6" class="label-coordinate">C10</text>
+        <circle cx="546.518016" cy="922.454016" class="dot" />
+        <text x="561.2" y="942.7" class="label-coordinate">C11</text>
+        <circle cx="512" cy="947.5328" class="dot" />
+        <text x="512" y="990.8" class="label-coordinate">D0/C12</text>
+        <circle cx="477.481984" cy="922.454016" class="dot" />
+        <text x="462.8" y="942.7" class="label-coordinate">D1</text>
+        <circle cx="442.963968" cy="897.375232" class="dot" />
+        <text x="428.3" y="917.6" class="label-coordinate">D2</text>
+        <circle cx="408.445952" cy="872.296448" class="dot" />
+        <text x="393.8" y="892.5" class="label-coordinate">D3</text>
+        <circle cx="373.927936" cy="847.217664" class="dot" />
+        <text x="359.2" y="867.4" class="label-coordinate">D4</text>
+        <circle cx="339.40992" cy="822.13888" class="dot" />
+        <text x="324.7" y="842.4" class="label-coordinate">D5</text>
+        <circle cx="304.891904" cy="797.060096" class="dot" />
+        <text x="290.2" y="817.3" class="label-coordinate">D6</text>
+        <circle cx="270.373888" cy="771.981312" class="dot" />
+        <text x="255.7" y="792.2" class="label-coordinate">D7</text>
+        <circle cx="235.855872" cy="746.902528" class="dot" />
+        <text x="221.2" y="767.1" class="label-coordinate">D8</text>
+        <circle cx="201.337856" cy="721.823744" class="dot" />
+        <text x="186.6" y="742.0" class="label-coordinate">D9</text>
+        <circle cx="166.81984" cy="696.74496" class="dot" />
+        <text x="152.1" y="717.0" class="label-coordinate">D10</text>
+        <circle cx="132.301824" cy="671.666176" class="dot" />
+        <text x="117.6" y="691.9" class="label-coordinate">D11</text>
+        <circle cx="97.783808" cy="646.587392" class="dot" />
+        <text x="50.2" y="662" class="label-coordinate">E0/D12</text>
+        <circle cx="110.968832" cy="606.009344" class="dot" />
+        <text x="85.0" y="595.0" class="label-coordinate">E1</text>
+        <circle cx="124.152832" cy="565.430272" class="dot" />
+        <text x="98.0" y="555.0" class="label-coordinate">E2</text>
+        <circle cx="137.337856" cy="524.852224" class="dot" />
+        <text x="111.0" y="515.0" class="label-coordinate">E3</text>
+        <circle cx="150.52288" cy="484.274176" class="dot" />
+        <text x="125.0" y="475.0" class="label-coordinate">E4</text>
+        <circle cx="163.70688" cy="443.695104" class="dot" />
+        <text x="138.0" y="435.0" class="label-coordinate">E5</text>
+        <circle cx="176.891904" cy="403.117056" class="dot" />
+        <text x="151.0" y="395.0" class="label-coordinate">E6</text>
+        <circle cx="190.076928" cy="362.539008" class="dot" />
+        <text x="165.0" y="355.0" class="label-coordinate">E7</text>
+        <circle cx="203.260928" cy="321.959936" class="dot" />
+        <text x="178.0" y="315.0" class="label-coordinate">E8</text>
+        <circle cx="216.445952" cy="281.381888" class="dot" />
+        <text x="191.0" y="275.0" class="label-coordinate">E9</text>
+        <circle cx="229.630976" cy="240.80384" class="dot" />
+        <text x="204.0" y="235.0" class="label-coordinate">E10</text>
+        <circle cx="242.814976" cy="200.224768" class="dot" />
+        <text x="217.0" y="195.0" class="label-coordinate">E11</text>
+    </g>
+</svg>

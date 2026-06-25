@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+   <style>
+      :root {
+         --color-base: #3c528b;
+         --color-primary: #e53937;
+      }
+      .bg { fill: var(--color-base); }
+      .stroke-primary { fill: none; stroke: var(--color-primary); stroke-width: 180; }
+      .fade { fill:none;stroke:url(#hexagon-c-fade);stroke-width:180; }
+   </style>
+   <defs>
+      <linearGradient id="hexagon-c-fade" x1="896" y1="290.298" x2="512" y2="955.405" gradientUnits="userSpaceOnUse">
+         <stop offset="15%" stop-color="var(--color-primary)" stop-opacity="1" />
+         <stop offset="50%" stop-color="var(--color-primary)" stop-opacity="0.5" />
+         <stop offset="85%" stop-color="var(--color-primary)" stop-opacity="1" />
+      </linearGradient>
+   </defs>
+   <rect class="bg" width="1024" height="1024"/>
+   <path class="fade" d="M 896 290.298 C 512 512 512 512 512 955.405"/>
+   <path class="stroke-primary" d="M 512 68.595 C 512 512 512 512 896 733.702"/>
+   <path class="stroke-primary" d="M 128 733.702 C 320 622.851 320 401.149 128 290.298"/>
+</svg>

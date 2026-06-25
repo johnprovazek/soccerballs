@@ -42,7 +42,6 @@ export const DEBUG_BALL_DESIGN = {
     { d: "debug.png", r: 0, i: "~" },
   ],
 };
-export const DEBUG_CANVAS_SIZE = 1024; // Size of the square debug canvas.
 export const DEBUG_MIDDLE_LABELS_OFFSET = 60; // Offset for the debug labels at the center of the panel.
 export const DEBUG_POINTS_ALPHA_TEST = 0.5; // Alpha test value for the points for debugging.
 export const DEBUG_POINTS_COLOR = 0xffff00; // Color of the points for debugging.
@@ -84,6 +83,9 @@ export const SHAPES: Shape[] = [
 export const SHOW_DEBUG = false; // Debug overlay flag.
 export const SHOW_STITCHES = true; // Stitches overlay flag.
 export const SOCCER_BALL_NAME_CHARACTER_LIMIT = 16; // Maximum character count for a soccer ball name.
+export const TEXTURE_SIZE = 1024; // Ideal texture height and width.
+export const TEXTURE_SIZE_FALLBACK = 100; // Fallback texture height and width.
+export const UV_SCALE = 0.995; // Scale applied to UV coordinates to fix texture edge gaps.
 export const VALID_TEXTURE_COLOR = 0xffffff; // Base color for valid textures.
 export const ZOOM_SPEED = 0.8; // Speed at which the view of the camera can move.
 

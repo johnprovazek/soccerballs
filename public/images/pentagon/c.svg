@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+   <style>
+      :root {
+         --color-base: #3c528b;
+         --color-primary: #e53937;
+      }
+      .bg { fill: var(--color-base); }
+      .stroke-primary { fill: none; stroke: var(--color-primary); stroke-width: 180; }
+      .fade { fill:none;stroke:url(#pentagon-c-fade);stroke-width:180; }
+   </style>
+   <defs>
+      <linearGradient id="pentagon-c-fade" x1="176.892" y1="403.117" x2="847.108" y2="403.117" gradientUnits="userSpaceOnUse">
+         <stop offset="15%" stop-color="var(--color-primary)" stop-opacity="1" />
+         <stop offset="50%" stop-color="var(--color-primary)" stop-opacity="0.5" />
+         <stop offset="85%" stop-color="var(--color-primary)" stop-opacity="1" />
+      </linearGradient>
+   </defs>
+   <rect class="bg" width="1024" height="1024"/>
+   <path class="fade" d="M 176.892 403.117 C 512 512 512 512 847.108 403.117"/>
+   <path class="stroke-primary" d="M 719.108 797.06 C 512 512 512 512 512 159.647"/>
+   <path class="stroke-primary" d="M 304.892 797.06 C 512 512 512 512 512 159.647"/>
+</svg>
