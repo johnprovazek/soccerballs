@@ -11,9 +11,9 @@
    </style>
    <defs>
       <linearGradient id="pentagon-c-fade" x1="176.892" y1="403.117" x2="847.108" y2="403.117" gradientUnits="userSpaceOnUse">
-         <stop offset="15%" stop-color="var(--color-primary)" stop-opacity="1" />
-         <stop offset="50%" stop-color="var(--color-primary)" stop-opacity="0.5" />
-         <stop offset="85%" stop-color="var(--color-primary)" stop-opacity="1" />
+         <stop offset="18%" stop-color="var(--color-primary)" stop-opacity="1" />
+         <stop offset="50%" stop-color="var(--color-primary)" stop-opacity="0.25" />
+         <stop offset="82%" stop-color="var(--color-primary)" stop-opacity="1" />
       </linearGradient>
    </defs>
    <rect class="bg" width="1024" height="1024"/>

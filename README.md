@@ -12,7 +12,7 @@ Built using Vite, TypeScript, and the [three.js](https://threejs.org/) library.
 
 <div align="center">
   <picture>
-    <img src="https://repository-images.githubusercontent.com/776272736/b00786ac-0936-425e-88ae-028f4c1d649b" width="830px">
+    <img src="https://repository-images.githubusercontent.com/776272736/07ff1e53-816f-4916-91a7-2227c4b999f2" width="830px" alt="Project Thumbnail Image">
   </picture>
 </div>
 
@@ -22,38 +22,38 @@ Built using Vite, TypeScript, and the [three.js](https://threejs.org/) library.
 
 To get started designing your own soccer ball, you will need to create textures of your own.
 Start by navigating through the [hexagon](public/images/hexagon/) and [pentagon](public/images/pentagon/) directories.
-Within these directories, you will find a handful of example textures that may serve as helpful references when building your own custom designs.
+Within these directories, you will find a handful of example textures that may serve as helpful references when building out your own custom designs.
 
 When prototyping new designs, it is recommended to mock up textures in a simple drawing application before building them out with vector graphics.
-
 Included in this project are [hexagon](public/images/hexagon/template.png) and [pentagon](public/images/pentagon/template.png) texture templates in PNG format.
 These are provided to help with mocking up textures when using a simple drawing application.
-These texture templates have 12 points along the shape edges.
-These points are intended to be helpful guides when lining up designs that go across your hexagon and pentagon edges.
-The hexagon and pentagon edges all have the same length.
+These texture templates have twelve points along the shape edges.
+These points are intended to be helpful guides when lining up your designs that go across the edges of hexagon and pentagon panels.
+The hexagon and pentagon edges have an equal length in both of these templates.
 This means you can use the same size scale when designing across both shapes.
 
 ### Vector Graphics
 
-When building out your textures with vector graphics, it is helpful to have the exact edge point coordinates.
-Below, you will find a helpful diagram and table showing UV and SVG edge point coordinates.
-The example textures in this project were built as 1024 x 1024 unit SVGs.
-In the table below, the SVG columns will list coordinates corresponding to those same 1024 x 1024 unit dimensions.
-Also included are UV mapping coordinates.
-These are provided if you would like to use a different design system or calculate a different dimensions other than 1024 x 1024 units.
+Also included in this project are [hexagon](public/images/hexagon/template.svg) and [pentagon](public/images/pentagon/template.svg) texture templates in SVG format.
+These are provided to help with finalizing your textures in a vector graphics editor.
 
-<div align="center">
+#### Exact Edge Point Coordinates
 
-#### Coordinate Diagram
+If you would like to start directly with exact edge point coordinates instead of the SVG templates, these are also provided.
+Expand the _Diagram & Coordinates Table_ below to find a helpful diagram and table showing the UV and SVG edge point coordinates.
+The SVG columns in this table list coordinates based on an SVG with 1024 × 1024 dimensions.
+These are the same dimensions used in the example textures found in this project.
+Also included are the UV coordinates.
+These are provided if you would like to use a different design system or calculate new edge point coordinates for different dimensions other than 1024 × 1024.
 
-  <picture>
-    <img src="./public/images/coordinate-diagram.svg" width="830px" alt="Hexagon and Pentagon Coordinate Diagram">
-  </picture>
-</div>
-
-<div align="center">
-
-#### Coordinate Table
+<details>
+  <summary style="font-size: 1rem; font-weight: 600; cursor: pointer;">Diagram & Coordinates Table</summary>
+  <div align="center">
+    <h3> Diagram </h3>
+    <picture>
+      <img src="./public/images/coordinate-diagram.svg" width="830px" alt="Hexagon and Pentagon Coordinate Diagram">
+    </picture>
+    <h3> Coordinates Table </h3>
 
 | Point      | Hex_UV_X | Hex_UV_Y | Hex_SVG_X   | Hex_SVG_Y  | Pent_UV_X | Pent_UV_Y | Pent_SVG_X | Pent_SVG_Y |
 | ---------- | -------- | -------- | ----------- | ---------- | --------- | --------- | ---------- | ---------- |
@@ -130,9 +130,10 @@ These are provided if you would like to use a different design system or calcula
 | **F10**    | 0.208333 | 0.860844 | 213.332992  | 142.495744 | -         | -         | -          | -          |
 | **F11**    | 0.229167 | 0.896929 | 234.667008  | 105.544704 | -         | -         | -          | -          |
 
-</div>
+  </div>
+</details>
 
-### Configuration & Deployment
+### Setup
 
 Once you have designed your textures, place them in the appropriate [hexagon](public/images/hexagon/) and [pentagon](public/images/pentagon/) directories.
 Next, you will need to reference these files in [soccer-balls.json](public/data/soccer-balls.json).
@@ -141,7 +142,7 @@ Each panel should contain the name of the texture file, the rotation value, and 
 
 You should now be ready to launch the application and start viewing your designs.
 
-> **Tip:** To help with setting the rotation value for specific panels, toggle the `SHOW_DEBUG` flag in [constants.ts](src/constants.ts) to display individual panel IDs on the 3D model.
+> **Tip:** To help with configuring the rotation value for specific panels, toggle the `SHOW_DEBUG` flag in [constants.ts](src/constants.ts) to display individual panel IDs on the 3D model.
 
 ## Credits
 

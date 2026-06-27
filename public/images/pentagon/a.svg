@@ -2,9 +2,9 @@
 <svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
    <style>
       :root {
-         --color-base: #D1A1A8;
-         --color-primary: #7C6C63;
-         --color-secondary: #968F8A;
+      --color-base: #98BDB4;
+      --color-primary: #4A6D65;
+      --color-secondary: #E0EBE8;
       }
       .bg { fill: var(--color-base); }
       .stroke-primary { fill: none; stroke: var(--color-primary); stroke-width: 48; }

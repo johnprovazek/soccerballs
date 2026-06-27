@@ -11,13 +11,13 @@
    </style>
    <defs>
       <linearGradient id="hexagon-c-fade" x1="896" y1="290.298" x2="512" y2="955.405" gradientUnits="userSpaceOnUse">
-         <stop offset="15%" stop-color="var(--color-primary)" stop-opacity="1" />
-         <stop offset="50%" stop-color="var(--color-primary)" stop-opacity="0.5" />
-         <stop offset="85%" stop-color="var(--color-primary)" stop-opacity="1" />
+         <stop offset="3.12%" stop-color="var(--color-primary)" stop-opacity="1" />
+         <stop offset="35.12%" stop-color="var(--color-primary)" stop-opacity="0.25" />
+         <stop offset="67.12%" stop-color="var(--color-primary)" stop-opacity="1" />
       </linearGradient>
    </defs>
    <rect class="bg" width="1024" height="1024"/>
    <path class="fade" d="M 896 290.298 C 512 512 512 512 512 955.405"/>
-   <path class="stroke-primary" d="M 512 68.595 C 512 512 512 512 896 733.702"/>
+   <path class="stroke-primary" d="M 512 68.595 C 512 343.595 657.843 596.202 896 733.702"/>
    <path class="stroke-primary" d="M 128 733.702 C 320 622.851 320 401.149 128 290.298"/>
 </svg>

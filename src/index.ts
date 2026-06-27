@@ -90,6 +90,7 @@ window.onload = async () => {
     // Setting up event listeners.
     prevButton.addEventListener("click", () => handleNavigation(-1));
     nextButton.addEventListener("click", () => handleNavigation(1));
+    window.addEventListener("keydown", handleArrowKeysNavigation);
     controls.addEventListener("change", handleControls);
   } catch (error) {
     console.error("Initialization failure:", error);
@@ -168,6 +169,15 @@ const handleNavigation = (direction: number) => {
   const totalSoccerBallsCount = soccerBallsData.designs.length;
   soccerBallIndex = (soccerBallIndex + direction + totalSoccerBallsCount) % totalSoccerBallsCount;
   loadActiveSoccerBall();
+};
+
+// Handles soccer ball design navigation through arrow keys.
+const handleArrowKeysNavigation = (event: KeyboardEvent): void => {
+  if (event.key === "ArrowLeft") {
+    handleNavigation(-1);
+  } else if (event.key === "ArrowRight") {
+    handleNavigation(1);
+  }
 };
 
 // Handles updating the rotation speed when controls change.
