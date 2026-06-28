@@ -26,6 +26,7 @@ const debugMesh: THREE.Mesh = new THREE.Mesh(new THREE.BufferGeometry(), []);
 
 // Soccer ball data.
 let soccerBallIndex: number = 0;
+let isBallLoading: boolean = false;
 let soccerBallsData!: SoccerBallData;
 const baseTextureMap: Record<string, THREE.Texture[]> = {};
 const debugTextureMap: Record<string, THREE.Texture[]> = {};
@@ -90,7 +91,8 @@ window.onload = async () => {
     // Setting up event listeners.
     prevButton.addEventListener("click", () => handleNavigation(-1));
     nextButton.addEventListener("click", () => handleNavigation(1));
-    window.addEventListener("keydown", handleArrowKeysNavigation);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
     controls.addEventListener("change", handleControls);
   } catch (error) {
     console.error("Initialization failure:", error);
@@ -164,20 +166,37 @@ const setupMeshLayer = (mesh: THREE.Mesh, meshGeometry: THREE.BufferGeometry, sh
   scene.add(mesh);
 };
 
+// Handles arrow key navigation, when pressing arrow keys down.
+const handleKeyDown = (e: KeyboardEvent): void => {
+  if (isBallLoading) {
+    return;
+  }
+  if (e.key === "ArrowLeft") {
+    prevButton.classList.add("active");
+    handleNavigation(-1);
+  } else if (e.key === "ArrowRight") {
+    nextButton.classList.add("active");
+    handleNavigation(1);
+  }
+};
+
+// Handles arrow key navigation, when releasing arrow keys.
+const handleKeyUp = (e: KeyboardEvent): void => {
+  if (e.key === "ArrowLeft") {
+    prevButton.classList.remove("active");
+  } else if (e.key === "ArrowRight") {
+    nextButton.classList.remove("active");
+  }
+};
+
 // Handles soccer ball design navigation buttons.
 const handleNavigation = (direction: number) => {
+  if (isBallLoading) {
+    return;
+  }
   const totalSoccerBallsCount = soccerBallsData.designs.length;
   soccerBallIndex = (soccerBallIndex + direction + totalSoccerBallsCount) % totalSoccerBallsCount;
   loadActiveSoccerBall();
-};
-
-// Handles soccer ball design navigation through arrow keys.
-const handleArrowKeysNavigation = (event: KeyboardEvent): void => {
-  if (event.key === "ArrowLeft") {
-    handleNavigation(-1);
-  } else if (event.key === "ArrowRight") {
-    handleNavigation(1);
-  }
 };
 
 // Handles updating the rotation speed when controls change.
@@ -189,9 +208,9 @@ const handleControls = (): void => {
 // Loads the active soccer ball.
 const loadActiveSoccerBall = async (): Promise<void> => {
   try {
+    setLoadingState(true);
     const missingBaseTextures = findMissingBaseTextures();
     if (missingBaseTextures.length > 0) {
-      setLoadingState(true);
       await loadMissingBaseTextures(missingBaseTextures);
     }
     updateLayeredMaterials();
@@ -210,11 +229,12 @@ const loadActiveSoccerBall = async (): Promise<void> => {
 
 // Toggles HTML element classes during loading.
 const setLoadingState = (isLoading: boolean): void => {
+  isBallLoading = isLoading;
   loadingSymbol.classList.toggle("hidden", !isLoading);
   soccerBallViewer.classList.toggle("grab-cursor", !isLoading);
   threeCanvas.classList.toggle("blur", isLoading);
-  const hideButtons = isLoading || !soccerBallsData || soccerBallsData.designs.length <= 1;
-  soccerBallButtons.forEach((button) => button.classList.toggle("hidden", hideButtons));
+  const disableButtons = isLoading || !soccerBallsData || soccerBallsData.designs.length <= 1;
+  soccerBallButtons.forEach((button) => button.classList.toggle("disabled", disableButtons));
 };
 
 // Finds missing base textures on the current soccer ball.

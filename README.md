@@ -12,7 +12,7 @@ Built using Vite, TypeScript, and the [three.js](https://threejs.org/) library.
 
 <div align="center">
   <picture>
-    <img src="https://repository-images.githubusercontent.com/776272736/07ff1e53-816f-4916-91a7-2227c4b999f2" width="830px" alt="Project Thumbnail Image">
+    <img src="https://repository-images.githubusercontent.com/776272736/08fae59d-82a5-4af2-b719-298e319e38df" width="830px" alt="Project Thumbnail Image">
   </picture>
 </div>
 
